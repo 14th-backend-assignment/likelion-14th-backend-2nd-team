@@ -1,0 +1,93 @@
+### 환경 변수 (한 번만 설정)
+@baseUrl = http://localhost:8000
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc5OTA1NzkxLCJpYXQiOjE3Nzk5MDIxOTEsImp0aSI6ImQ3NWQxNDNiM2QxZDQyZmRiNGY2ODM3MjFlMjFhMDkxIiwidXNlcl9pZCI6IjQifQ.4k9zzL4RbvkubvsCsPtsIIx_kVrUgm0UOgrhZggocx0
+
+### 1. 회원가입
+POST {{baseUrl}}/api/users/signup/
+Content-Type: application/json
+
+{
+  "username": "tester1",
+  "email": "tester1@test.com",
+  "nickname": "테스터1",
+  "password": "testpass123!",
+  "password_confirm": "testpass123!"
+}
+
+### 2. 로그인
+POST {{baseUrl}}/api/users/login/
+Content-Type: application/json
+
+{
+  "username": "서윤",
+  "password": "adminpass123!"
+}
+
+### 3. 내 정보 조회
+GET {{baseUrl}}/api/users/me/
+Authorization: Bearer {{accessToken}}
+
+### 4. 영화 등록 (관리자 토큰 필요)
+POST {{baseUrl}}/api/movies/
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "title": "기생충",
+  "director": "봉준호",
+  "genre": "drama",
+  "release_year": 2019,
+  "description": "한국 영화의 대표작"
+}
+
+### 5. 영화 목록 조회
+GET {{baseUrl}}/api/movies/
+
+### 5-1. 영화 검색
+GET {{baseUrl}}/api/movies/?search=기생충
+
+### 5-2. 장르 필터
+GET {{baseUrl}}/api/movies/?genre=drama
+
+### 6. 리뷰 작성
+POST {{baseUrl}}/api/reviews/
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "movie": 1,
+  "title": "정말 인상 깊은 영화",
+  "content": "스토리도 좋고 연출도 훌륭했습니다.",
+  "rating": 5
+}
+
+### 7. 리뷰 목록
+GET {{baseUrl}}/api/reviews/
+
+### 8. 리뷰 수정
+PATCH {{baseUrl}}/api/reviews/1/
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "content": "수정된 내용입니다.",
+  "rating": 4
+}
+
+### 9. 댓글 작성
+POST {{baseUrl}}/api/comments/
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "review": 1,
+  "content": "저도 동의합니다!"
+}
+
+### 10. 좋아요 토글
+POST {{baseUrl}}/api/reviews/1/like/
+Authorization: Bearer {{accessToken}}
+
+### 11. 내 리뷰 목록
+GET {{baseUrl}}/api/reviews/my/
+Authorization: Bearer {{accessToken}}

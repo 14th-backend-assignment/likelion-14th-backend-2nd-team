@@ -31,3 +31,14 @@ class MovieViewSet(viewsets.ModelViewSet):
         if self.action in ['list', 'retrieve']:
             return [permissions.AllowAny()]
         return [permissions.IsAdminUser()]
+    
+    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    def my(self, request):
+        """내가 작성한 리뷰 목록"""
+        queryset = self.get_queryset().filter(user=request.user)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = ReviewListSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = ReviewListSerializer(queryset, many=True)
+        return Response(serializer.data)
