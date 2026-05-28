@@ -25,4 +25,6 @@ urlpatterns = [
     path('api/movies/', include('movies.urls')),  # 추가
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/reviews/', include('reviews.urls')),
+    path('api/', include('comments.urls')),
 ]

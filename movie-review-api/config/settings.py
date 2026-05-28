@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'drf_spectacular',
     'django_filters',
+    'corsheaders',
     # 내 앱
     'users',
     'movies',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -170,3 +172,11 @@ SPECTACULAR_SETTINGS = {
 # 커스텀 User 모델 (★ 마이그레이션 전에 반드시 설정!)
 # ============================================================
 AUTH_USER_MODEL = 'users.User'
+
+# ============================================================
+# CORS 설정 (React 프론트엔드 연동)
+# ============================================================
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]

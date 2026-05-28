@@ -1,0 +1,22 @@
+# Python / Django
+venv/
+**/venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.sqlite3
+db.sqlite3
+.env
+
+# React / Node
+node_modules/
+**/node_modules/
+dist/
+.vite/
+package-lock.json
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+*.log
